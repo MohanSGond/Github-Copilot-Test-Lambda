@@ -1,3 +1,4 @@
+
 name: Deploy Lambda Function
 
 on:
@@ -14,55 +15,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Use Node.js
+    - name: Setup Node.js environment
       uses: actions/setup-node@v2
       with:
-        node-version: 18
+        node-version: '14'
 
     - name: Install dependencies
-      run: npm ci
+      run: |
+        npm install
 
-    # - name: Package application
-    #   run: npm run package
-
-    # - name: Deploy to AWS Lambda
-    #   uses: appleboy/lambda-action@master
-    #   with:
-    #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     aws_region: us-east-1
-    #     function_name: my-lambda-app
-    #     # zip_file: package.zip
-      - name: Deploy Lambda function
-     run: |
-        chmod +x ./deploy.sh
-        ./deploy.sh my-lambda-app
+    - name: Deploy Lambda function
+      run: |
+        node deploy.js my-lambda-app
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-east-1'  # Update this to your AWS region
-
-
-# jobs:
-#   deploy:
-#     runs-on: windows-latest
-#     environment: GitHub_Deployment
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Set up AWS credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: us-east-1
-
-#       - name: Deploy Lambda function
-#         run: |
-#           aws lambda create-function \
-#             --function-name my-lambda-function \
-#             --runtime nodejs14.x \
-#             --handler index.handler \
-#             --region us-east-1
