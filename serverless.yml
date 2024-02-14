@@ -1,0 +1,15 @@
+service: my-lambda-app
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  stage: dev
+
+functions:
+  helloWorld:
+    handler: src/lambda/handler.handler
+    events:
+      - http:
+          path: hello
+          method: get

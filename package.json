@@ -1,0 +1,19 @@
+{
+  "name": "my-lambda-app",
+  "version": "1.0.0",
+  "description": "AWS Lambda application",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/index.js"
+  },
+  "keywords": ["aws", "lambda", "nodejs"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1030.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}
