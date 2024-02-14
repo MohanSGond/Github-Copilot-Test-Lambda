@@ -21,10 +21,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Deploy Lambda function
-        run: |
-          aws lambda create-function \
-            --function-name my-lambda-function \
-            --runtime nodejs14.x \
-            --handler index.handler \
-            --region us-east-1
+   - name: Update Lambda Configuration
+      run: |
+        aws lambda update-function-configuration --function-name my-lambda-app --memory-size 512 --timeout 05
