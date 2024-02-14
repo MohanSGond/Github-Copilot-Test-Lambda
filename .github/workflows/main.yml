@@ -22,8 +22,8 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Package application
-      run: npm run package
+    # - name: Package application
+    #   run: npm run package
 
     - name: Deploy to AWS Lambda
       uses: appleboy/lambda-action@master
@@ -32,7 +32,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws_region: us-east-1
         function_name: my-lambda-app
-        zip_file: package.zip
+        # zip_file: package.zip
 
 # jobs:
 #   deploy:
